@@ -22,5 +22,23 @@
     ```
   - Clonar o repositório com o código para criar a arquitetura.
     ```
-        $ git clone 
+        $ git clone https://github.com/veniciusgrjr/arquitetura
     ```
+
+  - Entrar no diretório.
+    ```
+        $ cd arquitetura
+    ```
+
+  - Baixar um box pré-configurado.
+    ```
+        $ vagrant box add hashicorp/precise32
+    ```
+
+  - Gerar toda a arquitetura.
+    ```
+        $ vagrant up
+    ```
+
+  - Ao final, teremos o site funcionando no endereço: http://192.168.33.12:8080/devopsnapratica/ 
+
