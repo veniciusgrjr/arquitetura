@@ -1,0 +1,60 @@
+- hosts: all
+  sudo:	True
+  user:	vagrant
+  tasks:
+    - name: "Atualizando pacotes"
+      shell: sudo apt-get -y update
+
+    - name: "Instalando tomcat7 mysql-client "
+      shell: sudo apt-get install -y tomcat7 mysql-client
+
+    - name: "Configurando o Keytool para conexões ssl"
+      shell: cd /var/lib/tomcat7/conf
+      shell: sudo keytool -genkey -alias tomcat -keyalg RSA -keystore .keystore < /vagrant/tmp
+
+    - name: "Configurando servidor tomcat para habilitar ssl"
+      shell: sudo rm /var/lib/tomcat7/conf/server.xml
+      shell: sudo cp /vagrant/server.xml /var/lib/tomcat7/conf/server.xml
+
+    - name: "Alterando a quantidade de memória do tomcat7"
+      shell: sudo rm /etc/default/tomcat7
+      shell: sudo cp /vagrant/tomcat7 /etc/default/tomcat7
+      shell: sudo service tomcat7 restart
+
+    - name: "Instalando git, maven2 e openjdk-6-jdk"
+      shell: sudo apt-get install -y git maven2 openjdk-6-jdk
+
+    - name: "Clonando o projeto loja-virtual-devops.git"
+      shell: cd /home/vagrant
+      shell: git clone https://github.com/dtsato/loja-virtual-devops.git
+    
+    - name: "Export MAVEN_OPTS"
+      shell: export MAVEN_OPTS=-Xmx256m
+
+    - name: "Copiando o arquivo de configuração do Maven"
+      shell: sudo cp /vagrant/pom.xml /home/vagrant/pom.xml
+
+    - name: "Buinging"
+      shell: sudo mvn install 
+
+
+    - name: "Configuração do banco"
+      shell: sudo rm /var/lib/tomcat7/conf/context.xml
+      shell: sudo cp /vagrant/context.xml /var/lib/tomcat7/conf/context.xml
+
+    - name: "Deploy"
+      shell: cd ~/loja-virtual-devops
+      shell: sudo cp site/target/devopsnapratica.war /var/lib/tomcat7/webapps
+      shell: sudo service tomcat7 restart
+
+
+
+
+    
+
+
+
+
+    
+
+

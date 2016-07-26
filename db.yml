@@ -1,0 +1,56 @@
+- hosts: all
+  sudo:	True
+  user:	vagrant
+  vars:
+    MySQL_root_pass: secret
+    MySQL_loja_pass: lojasecret
+  tasks:
+
+    - name: "Atualizando pacotes"
+      shell: sudo apt-get -y update
+
+    - name: "Set MySQL root password before installing"
+      debconf: name='mysql-server' question='mysql-server/root_password' value='{{MySQL_root_pass | quote}}' vtype='password'
+
+    - name: "Confirm MySQL root password before installing"
+      debconf: name='mysql-server' question='mysql-server/root_password_again' value='{{MySQL_root_pass | quote}}' vtype='password'
+
+    - name: "Install MySQL"
+      apt: package={{ item }} state=installed force=yes update_cache=yes cache_valid_time=3600
+      when: ansible_os_family == 'Debian'
+      with_items:
+        - mysql-server
+        - mysql-client
+        - python-mysqldb
+
+    - name: "Deletes anonymous MySQL server user for localhost"
+      mysql_user: user="" state="absent" login_password="{{ MySQL_root_pass }}" login_user=root
+    
+    - name: "Secures the MySQL root user"
+      mysql_user: user="root" password="{{ MySQL_root_pass }}" host="{{ item }}" login_password="{{MySQL_root_pass}}" login_user=root
+      with_items:
+        - 127.0.0.1
+        - localhost
+        - ::1
+        - "{{ ansible_fqdn }}"
+
+    - name: "Removes the MySQL test database"
+      mysql_db: db=test state=absent login_password="{{ MySQL_root_pass }}" login_user=root
+
+    - name: "Criando o arquivo de configuração allow_external.cnf"
+      shell: sudo cp /vagrant/allow_external.cnf /etc/mysql/conf.d/allow_external.cnf
+
+    - name: "Reiniciando o Mysql"
+      shell: sudo service mysql restart
+
+    - name: "Criando o banco loja_schema"
+      mysql_db: name=loja_schema state=present login_password="{{ MySQL_root_pass }}" login_user=root
+
+    - name: "Criando usuario mysql"
+      mysql_user: name=loja password="{{ MySQL_loja_pass }}" priv=loja_schema.*:ALL,GRANT state=present login_password="{{MySQL_root_pass}}" login_user=root
+
+
+
+
+
+
