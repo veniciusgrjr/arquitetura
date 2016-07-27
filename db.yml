@@ -47,10 +47,9 @@
       mysql_db: name=loja_schema state=present login_password="{{ MySQL_root_pass }}" login_user=root
 
     - name: "Criando usuario mysql"
-      mysql_user: name=loja password="{{ MySQL_loja_pass }}" priv=loja_schema.*:ALL,GRANT state=present login_password="{{MySQL_root_pass}}" login_user=root
-
-
-
-
+      mysql_user: name=loja password="{{ MySQL_loja_pass }}" priv={{ item }} host="%" state=present login_password="{{MySQL_root_pass}}" login_user=root
+      with_items:
+        - 'loja_schema.*:ALL,GRANT'
+        - '*.*:ALL,GRANT'
 
 

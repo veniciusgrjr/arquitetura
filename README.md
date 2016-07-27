@@ -8,11 +8,19 @@
         ```
         $ sudo apt-get install vagrant
         ```
-  - Install Git
+  - Ansible
+        ```
+        $ sudo apt-get install software-properties-common
+        $ sudo apt-add-repository ppa:ansible/ansible
+        $ sudo apt-get update
+        $ sudo apt-get install ansible
+        ```
+
+  - Git
         ```
            $ sudo apt-get install git-core
         ```
-  - Configurar usuário Gti:
+  - Configurar usuário Git:
     ```
         $ git config --global user.name "Coloque seu nome de usuário aqui"
     ```

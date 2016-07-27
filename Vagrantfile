@@ -1,6 +1,9 @@
 VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "hashicorp/precise32"
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id , "--memory", "512"]
+  end
 
   config.vm.define :db do |db_config|
     db_config.vm.hostname = "db"
