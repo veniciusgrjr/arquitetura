@@ -1,14 +1,14 @@
 # Pré-requisitos
-  - Virtual Box
+  - Virtual Box.
          ```
             $ sudo apt-get update
             $ sudo apt-get -y install virtualbox 
          ```
-  - Vagrant
+  - Vagrant.
         ```
         $ sudo apt-get install vagrant
         ```
-  - Ansible
+  - Ansible.
         ```
         $ sudo apt-get install software-properties-common
         $ sudo apt-add-repository ppa:ansible/ansible
@@ -16,15 +16,15 @@
         $ sudo apt-get install ansible
         ```
 
-  - Git
+  - Git.
         ```
            $ sudo apt-get install git-core
         ```
-  - Configurar usuário Git:
+  - Configurar usuário Git.
     ```
         $ git config --global user.name "Coloque seu nome de usuário aqui"
     ```
-  - Configurar email
+  - Configurar email.
     ```
         $ git config --global user.email "seu_email@seu_provedor.com"
     ```
