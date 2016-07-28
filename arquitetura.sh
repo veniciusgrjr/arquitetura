@@ -12,6 +12,7 @@ sudo apt-get -y install vagrant
 echo "Instalando dkms"
 sudo apt-get -y install virtualbox-dkms
 
+
 echo "Instalando Ansible"
 sudo apt-get -y install software-properties-common
 sudo apt-add-repository ppa:ansible/ansible

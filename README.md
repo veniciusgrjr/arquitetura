@@ -1,21 +1,4 @@
 # Pré-requisitos
-  - Virtual Box.
-         ```
-            $ sudo apt-get update
-            $ sudo apt-get -y install virtualbox 
-         ```
-  - Vagrant.
-        ```
-        $ sudo apt-get install vagrant
-        ```
-  - Ansible.
-        ```
-        $ sudo apt-get install software-properties-common
-        $ sudo apt-add-repository ppa:ansible/ansible
-        $ sudo apt-get update
-        $ sudo apt-get install ansible
-        ```
-
   - Git.
         ```
            $ sudo apt-get install git-core
@@ -38,14 +21,9 @@
         $ cd arquitetura
     ```
 
-  - Baixar um box pré-configurado.
+  - Exexutar.
     ```
-        $ vagrant box add hashicorp/precise32
-    ```
-
-  - Gerar toda a arquitetura.
-    ```
-        $ vagrant up
+        $ ./arquitetura.sh
     ```
 
   - Ao final, teremos o site funcionando no endereço: http://192.168.33.12:8080/devopsnapratica/ 
