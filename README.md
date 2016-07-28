@@ -23,7 +23,7 @@
 
   - Exexutar.
     ```
-        $ ./arquitetura.sh
+        $ sudo sh ./arquitetura.sh
     ```
 
   - Ao final, teremos o site funcionando no endereço: http://192.168.33.12:8080/devopsnapratica/ 
