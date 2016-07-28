@@ -48,7 +48,7 @@
       shell: sudo cp /vagrant/context.xml /var/lib/tomcat7/conf/context.xml
 
     - name: "Deploy"
-      shell: sudo cp /home/vagrant/loja-virtual-devops/site/target/devopsnapratica.war /var/lib/tomcat7/webapps
+      shell: sudo cp /home/vagrant/loja-virtual-devops/combined/target/devopsnapratica.war /var/lib/tomcat7/webapps
 
     - name: "Reiniciando o tomcat7"
       shell: sudo service tomcat7 restart
