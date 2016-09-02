@@ -28,3 +28,10 @@
 
   - Ao final, teremos o site funcionando no endereço: http://192.168.33.12:8080/devopsnapratica/ 
 
+  - E poderemos acessar o Nagios para monitoramento no endereço: http://192.168.33.14/nagios3
+   
+    ```
+        Usuário: nagiosadmin
+        Senha: secret
+    ```
+
