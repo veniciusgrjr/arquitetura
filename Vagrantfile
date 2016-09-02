@@ -16,10 +16,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define :web do |web_config|
     web_config.vm.hostname = "web"
     web_config.vm.network :private_network,:ip => "192.168.33.12"
+    
     web_config.vm.provision "ansible" do |ansible|
       ansible.playbook = "web.yml"
-      ansible.verbose = "vvv"
     end
+
   end
+
+  config.vm.define :monitor do |monitor_config|
+    monitor_config.vm.hostname = "monitor"
+    monitor_config.vm.network :private_network,:ip => "192.168.33.14"
+    
+    monitor_config.vm.provision "ansible" do |ansible|
+      ansible.playbook = "monitor.yml"
+    end
+
+  end
+
 end
 

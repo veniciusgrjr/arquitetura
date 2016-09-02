@@ -1,0 +1,34 @@
+- hosts: all
+  sudo:	True
+  user:	vagrant
+  tasks:
+    - name: "Pre-configuracao do nagius"
+      shell: sudo echo < /vagrant/echo_package
+
+    - name: "Pre-configuracao do nagius"
+      shell: sudo echo < /vagrant/echo_deb
+
+    - name: "Atualizando pacotes"
+      shell: sudo apt-get update
+
+    - name: "setting debconf mailname"
+      debconf: name=postfix question="postfix/mailname" value="'monitor.lojavirtualdevops.com.br'" vtype="string"
+     
+    - name: "Setting debconf main mailer type"
+      debconf: name=postfix question="postfix/main_mailer_type" value="'Internet Site'" vtype="string"
+
+    - name: "Setting debconf adminpassword"
+      debconf: name=nagios3-cgi question="nagios3/adminpassword" value="secret" vtype="string"
+
+    - name: "Setting debconf repeat adminpassword"
+      debconf: name=nagios3-cgi question="nagios3/adminpassword-repeat" value="secret" vtype="string"
+
+    - name: "Install nagios3"
+      shell: sudo apt-get -y install nagios3
+
+    - name: "configure nagios3"
+      shell: sudo cp /vagrant/loja_virtual.cfg /etc/nagios3/conf.d/loja_virtual.cfg
+
+    - name: "reloading nagios3"
+      shell: sudo service nagios3 reload
+
